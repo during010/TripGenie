@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_331e675c5df60391d25e1dc584167a3e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_331e675c5df60391d25e1dc584167a3e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_331e675c5df60391d25e1dc584167a3e = L.map(
+                "map_331e675c5df60391d25e1dc584167a3e",
+                {
+                    center: [36.67698569012006, 117.01738563024188],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_3a554b84fcbba12cfaefc067eb1e82af = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_3a554b84fcbba12cfaefc067eb1e82af.addTo(map_331e675c5df60391d25e1dc584167a3e);
+        
+    
+            var marker_3b920223762f7a9206a6a81226beeb66 = L.marker(
+                [36.677344442597935, 117.02520218316909],
+                {}
+            ).addTo(map_331e675c5df60391d25e1dc584167a3e);
+        
+    
+            var icon_3c42a23dcf966210c5e18d352c03ee48 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_3b920223762f7a9206a6a81226beeb66.setIcon(icon_3c42a23dcf966210c5e18d352c03ee48);
+        
+    
+        var popup_2b0c36485a5a229c52397c99804f6c60 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_98c09adaf7af1d30d7f0f193eafdf9b6 = $(`<div id="html_98c09adaf7af1d30d7f0f193eafdf9b6" style="width: 100.0%; height: 100.0%;">0 - Bai Hua Zhou</div>`)[0];
+                popup_2b0c36485a5a229c52397c99804f6c60.setContent(html_98c09adaf7af1d30d7f0f193eafdf9b6);
+            
+        
+
+        marker_3b920223762f7a9206a6a81226beeb66.bindPopup(popup_2b0c36485a5a229c52397c99804f6c60)
+        ;
+
+        
+    
+    
+            var marker_d305f50e6ea6da1af19dba941603504e = L.marker(
+                [36.68012930432908, 117.02841260013496],
+                {}
+            ).addTo(map_331e675c5df60391d25e1dc584167a3e);
+        
+    
+            var icon_99fba98c39d557fd01f3c4d5ab482c5a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_d305f50e6ea6da1af19dba941603504e.setIcon(icon_99fba98c39d557fd01f3c4d5ab482c5a);
+        
+    
+        var popup_4f0b6a9ab0493e210fc1fa1f451b4793 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5bd6613a3f0432dd67516111b039ab0c = $(`<div id="html_5bd6613a3f0432dd67516111b039ab0c" style="width: 100.0%; height: 100.0%;">1 - Autumn Willow Poetry Society</div>`)[0];
+                popup_4f0b6a9ab0493e210fc1fa1f451b4793.setContent(html_5bd6613a3f0432dd67516111b039ab0c);
+            
+        
+
+        marker_d305f50e6ea6da1af19dba941603504e.bindPopup(popup_4f0b6a9ab0493e210fc1fa1f451b4793)
+        ;
+
+        
+    
+    
+            var marker_0b0f7ae419b11c1806016ea446cbf3d5 = L.marker(
+                [36.66729084232669, 116.9897350378878],
+                {}
+            ).addTo(map_331e675c5df60391d25e1dc584167a3e);
+        
+    
+            var icon_1f44798cbd6a845d4377e8534116ecf2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_0b0f7ae419b11c1806016ea446cbf3d5.setIcon(icon_1f44798cbd6a845d4377e8534116ecf2);
+        
+    
+        var popup_31c19bc32e147e63001079be145c7b90 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_04845a37d4ce6c05dc9277de6e6ee248 = $(`<div id="html_04845a37d4ce6c05dc9277de6e6ee248" style="width: 100.0%; height: 100.0%;">2 - Zhongshan Park</div>`)[0];
+                popup_31c19bc32e147e63001079be145c7b90.setContent(html_04845a37d4ce6c05dc9277de6e6ee248);
+            
+        
+
+        marker_0b0f7ae419b11c1806016ea446cbf3d5.bindPopup(popup_31c19bc32e147e63001079be145c7b90)
+        ;
+
+        
+    
+    
+            var marker_feb21a21d000c98adde57ba141ddcf37 = L.marker(
+                [36.68317817122653, 117.02619269977569],
+                {}
+            ).addTo(map_331e675c5df60391d25e1dc584167a3e);
+        
+    
+            var icon_129af3351c12360f5a3b446d2641b5f5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_feb21a21d000c98adde57ba141ddcf37.setIcon(icon_129af3351c12360f5a3b446d2641b5f5);
+        
+    
+        var popup_d24baa50b3b275980cc36938cfb2e3e3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_35768e21fd7b4c0a5389e5f38413f8bc = $(`<div id="html_35768e21fd7b4c0a5389e5f38413f8bc" style="width: 100.0%; height: 100.0%;">3 - Jinan Daming Lake Scenic Area</div>`)[0];
+                popup_d24baa50b3b275980cc36938cfb2e3e3.setContent(html_35768e21fd7b4c0a5389e5f38413f8bc);
+            
+        
+
+        marker_feb21a21d000c98adde57ba141ddcf37.bindPopup(popup_d24baa50b3b275980cc36938cfb2e3e3)
+        ;
+
+        
+    
+    
+            var poly_line_45ce90e763f4684c3cb7f81200283920 = L.polyline(
+                [[36.677344442597935, 117.02520218316909], [36.68012930432908, 117.02841260013496], [36.66729084232669, 116.9897350378878], [36.68317817122653, 117.02619269977569]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1, "smoothFactor": 1.0, "stroke": true, "weight": 2.5}
+            ).addTo(map_331e675c5df60391d25e1dc584167a3e);
+        
+</script>
+</html>

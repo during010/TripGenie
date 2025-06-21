@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Jinan Travel Assistant</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/headstyle.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- Left Sidebar -->
+    <div class="left-sidebar" id="leftSidebar">
+        <div class="toggle-sidebar" onclick="toggleSidebar()">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="logo-section">
+            <img src="C:\Users\admin\PycharmProjects\python创新\static\logo.png" alt="Logo" class="logo">
+        </div>
+        <div class="sidebar-tools">
+            <div class="sidebar-tool" id="newConversationBtnSide">
+                <i class="fas fa-sync"></i>
+                <span>Start New Conversation</span>
+            </div>
+            <div class="sidebar-tool">
+                <i class="fas fa-history"></i>
+                <span>History</span>
+            </div>
+            <div class="sidebar-tool">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </div>
+             <div class="sidebar-tool" onclick="toggleLanguage()">
+                <i class="fas fa-globe"></i>
+                <span id="languageText">Switch Between Chinese/English</span>
+            </div>
+            <div class="sidebar-tool" onclick="toggleSelect('themeSelect')">
+                <i class="fas fa-moon"></i>
+                <span>Theme Switch</span>
+                <select id="themeSelect" class="theme-select" onchange="handleThemeChange()" style="display: none;">
+                    <option value="light">Light Theme</option>
+                    <option value="dark">Dark Theme</option>
+                    <option value="custom">Custom Background</option>
+                </select>
+            </div>
+            <div class="user-settings">
+                <div class="sidebar-tool" id="loginButton" onclick="toggleLogin()">
+                    <i class="fas fa-user"></i>
+                    <span id="loginText">Login/Register</span>
+                </div>
+                <div class="sidebar-tool" id="logoutItem" style="display: none;" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </div>
+            </div>
+
+            <div class="settings-menu">
+                <div class="settings-item">
+                    <i class="fas fa-user"></i>
+                    <span>User 0107</span>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-adjust"></i>
+                    <span>Interface Theme</span>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-globe"></i>
+                    <span>Language</span>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-print"></i>
+                    <span>Export PDF</span>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-camera"></i>
+                    <span>Screenshot</span>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-user-cog"></i>
+                    <span>User Feedback</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-form">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>Login</h3>
+                <button class="close-button" onclick="closeLoginModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <div class="register-link" onclick="showRegisterModal()">Register for a new account</div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="login-modal" id="registerModal" style="display: none;">
+        <div class="login-form">
+            <h3>Register</h3>
+            <input type="text" id="registerUsername" placeholder="Username">
+            <input type="password" id="registerPassword" placeholder="Password">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+            <button onclick="register()">Register</button>
+            <div class="register-link" onclick="showLoginModal()">Back to Login</div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-header">
+                <h3 id="successModalTitle">Registration Successful!</h3>
+                <button class="close-button" onclick="closeSuccessModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="success-footer">
+                <button class="success-button" onclick="closeSuccessModal()">OK</button>
+            </div>
+        </div>
+    </div>
+    <!-- Confirm Modal -->
+    <div class="confirm-modal" id="confirmModal">
+        <div class="confirm-content">
+            <div class="confirm-header">
+                <h3 id="confirmModalTitle"></h3>
+                <button class="close-button" onclick="closeConfirmModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="confirm-body">
+                <p id="confirmModalMessage">Are you sure you want to log out?</p>
+            </div>
+            <div class="confirm-footer">
+                <button class="cancel-button" onclick="closeConfirmModal()">Cancel</button>
+                <button class="confirm-button" onclick="confirmLogout()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Chat Area -->
+    <div class="main-content">
+        <div class="chat-header">
+            <h3>Jinan Travel Assistant</h3>
+        </div>
+        <div class="modal-overlay" id="feedbackOverlay">
+            <div class="feedback-modal">
+                <h3>Feedback Details</h3>
+                <p>Please tell us your specific thoughts:</p>
+                <textarea class="feedback-textarea" placeholder="Please enter your feedback..."></textarea>
+                <div class="modal-buttons">
+                    <button class="modal-button secondary" onclick="closeFeedbackModal()">Cancel</button>
+                    <button class="modal-button primary" onclick="submitFeedback()">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="chat-container">
+            <!-- AI Message -->
+            <div class="message-wrapper">
+                <div class="avatar">AI</div>
+                <div class="message">
+                    Hello! This is the Jinan Travel Assistant. To help you plan a suitable travel itinerary, please tell me your initial travel ideas, and I will help you plan it.
+                </div>
+                <div class="typing-indicator">AI is typing...</div>
+            </div>
+        </div>
+        <div class="input-area">
+            <div class="input-container">
+                <textarea id="userInput" class="input-box" placeholder="Please enter your question..."></textarea>
+            </div>
+            <div class="tools-bar">
+                <div id="aiModel" style="display: inline-block; border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px;">DeepSeek</div>
+                <div class="button-group">
+                    <button id="exportPdfBtn" class="export-button">Export to PDF</button>
+                    <button id="screenshotBtn" class="screenshot-button" onclick="takeScreenshot()">Screenshot</button>
+                    <button class="send-button" id="sendBtn">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Switching Menu -->
+    <div class="theme-menu" id="themeMenu">
+        <div class="theme-menu-item" onclick="switchToDarkTheme()">
+            <i class="fas fa-moon"></i> Dark Theme
+        </div>
+        <div class="theme-menu-item" onclick="switchToLightTheme()">
+            <i class="fas fa-sun"></i> Light Theme
+        </div>
+        <div class="theme-menu-item" onclick="openFileInput()">
+            <i class="fas fa-image"></i> Custom Background
+        </div>
+    </div>
+    <input type="file" id="file-input" accept="image/*">
+
+    <div class="right-sidebar" id="rightSidebar">
+        <div class="search-header">
+            <h3>Web Search</h3>
+            <button class="tool-button" onclick="toggleSearch()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="search-results">
+            <!-- Version 1 -->
+            <div class="search-item version-1">
+                <h4><a href="https://cn.tripadvisor.com/Attractions-g297457-Activities-Jinan_Shandong.html" target="_blank">Top 10 Attractions in Jinan - Tripadvisor</a></h4>
+                <p>Popular attractions in Jinan, recommended selection methods: 1. Shandong Museum, 2. Baotu Spring Park, 3. Daming Lake...</p>
+            </div>
+            <div class="search-item version-1">
+                <h4><a href="https://news.qq.com/rain/a/20220115A01O6400" target="_blank">Top 10 Must-Visit Attractions in Jinan, Experiencing the Comprehensive Features of泉城 Mountain, Spring, Lake, River, and City</a></h4>
+                <p>Jinan is famous for its springs. However, Jinan, located in the shadow of Mount Tai and south of the Ji River, has much more to offer visitors in terms of cultural history and natural scenery. Here are the top ten must-visit attractions in Jinan recommended by Lao Jin...</p>
+            </div>
+            <div class="search-item version-1">
+                <h4><a href="https://news.qlone.cn/2023/1019/c114275-30763285.html" target="_blank">Historical Buildings and Cultural Sites in Jinan - Qi Lu Net</a></h4>
+                <p>Explore Jinan's old streets and historical buildings, such as Furong Street and General Temple Street.</p>
+            </div>
+            <div class="search-item version-1">
+                <h4><a href="https://k.sina.com.cn/article_6359585029_17b0f9105001017imq.html" target="_blank">Top 10 Famous Specialties in Jinan, Can't Stop Drooling! Have You Tried Them All?</a></h4>
+                <p>The top ten specialities in Jinan. Jinan, a city with a rich historical and cultural heritage, attracts visitors not only with its unique scenery but also with its authentic cuisine. There are many mouth-watering specialties in Jinan, here are the top ten...</p>
+            </div>
+            <div class="search-item version-1">
+                <h4><a href="https://www.sohu.com/a/870067817_121924581" target="_blank">Tourist Attractions and Travel Guides for Jinan, China in 2025</a></h4>
+                <p>In autumn, the red leaves of Mount Fo Hui turn yellow, and the springs flow gently, showcasing the unique charm of Jinan...</p>
+            </div>
+            <div class="search-item version-1">
+                <h4><a href="https://www.mafengwo.cn/cy/10575/" target="_blank">Jinan Food, Jinan Food Recommendations</a></h4>
+                <p>It's not difficult to find a Lu菜 restaurant in Jinan, but it's not easy to find a satisfying one...</p>
+            </div>
+
+            <!-- Version 2 -->
+            <div class="search-item version-2">
+                <h4><a href="https://www.zhihu.com/question/634249244" target="_blank">What Are the Famous Historical and Cultural Sites Worth Visiting in Jinan?</a></h4>
+                <p>Explore Jinan's historical sites, such as Baotu Spring, Daming Lake, and Qianfo Mountain...</p>
+            </div>
+            <div class="search-item version-2">
+                <h4><a href="https://www.dahepiao.com/lvyounews1/20250423510669.html" target="_blank">2025 Jinan Xueyehu Lake Tourism Guide (Including Ticket Prices, Address, Map, and Introduction)</a></h4>
+                <p>Enjoy Jinan's natural beauty, a scenic area just one hour away from Jinan city, offering surprises in every season...</p>
+            </div>
+            <div class="search-item version-2">
+                <h4><a href="https://jn.bendibao.com/meishi/201761/46549.shtm" target="_blank">Top 10 Ba Zi Rou Restaurants in Jinan Recommended, Two Pieces of Ba Zi Rou Please~</a></h4>
+                <p>Here is a map of popular Ba Zi Rou restaurants recommended by veteran foodies in Jinan. Hurry up and get it!!...</p>
+            </div>
+            <div class="search-item version-2">
+                <h4><a href="https://cn.tripadvisor.com/Attractions-g297457-Activities-c26-t143-Jinan_Shandong.html" target="_blank">Top 10 Shopping Centers in Jinan</a></h4>
+                <p>Shopping and experiencing nightlife in Jinan's commercial areas, such as MixC...</p>
+            </div>
+            <div class="search-item version-2">
+                <h4><a href="https://sd.dzwww.com/jn/202310/t20231019_10746224.html" target="_blank">Ancient Villages and Folk Culture in Jinan - Mass Media</a></h4>
+                <p>Explore ancient villages and folk culture sites such as Zhujia Yu and Zhangqiu Ancient Village.</p>
+            </div>
+
+            <!-- Version 3 -->
+            <div class="search-item version-3">
+                <h4><a href="https://www.maigoo.com/top/437674.html" target="_blank">One-Day Tour Recommendation in Jinan</a></h4>
+                <p>A one-day tour recommendation for time-limited visitors, covering Baotu Spring, Daming Lake, and Qianfo Mountain...</p>
+            </div>
+            <div class="search-item version-3">
+                <h4><a href="https://zhuanlan.zhihu.com/p/617975801" target="_blank">Two-Day In-Depth Tour of Jinan</a></h4>
+                <p>A two-day tour recommendation, deeply experiencing Jinan's historical culture and natural scenery...</p>
+            </div>
+            <div class="search-item version-3">
+                <h4><a href="https://zhuanlan.zhihu.com/p/40680191" target="_blank">Jinan Photography Spots Guide</a></h4>
+                <p>A paradise for photography enthusiasts, recommending the best spots for capturing Jinan's scenic beauty...</p>
+            </div>
+            <div class="search-item version-3">
+                <h4><a href="https://zhuanlan.zhihu.com/p/620283564" target="_blank">Top 10 Urban Parks in Jinan</a></h4>
+                <p>Daming Lake Park, located in the northern part of Jinan's old city, was established in 1958. Named after Daming Lake as its main body, it is praised as the "Pearl of the Spring City" and the "First Spring Lake in China"...</p>
+            </div>
+
+            <!-- Version 4 -->
+            <div class="search-item version-4">
+                <h4><a href="https://sd.dzwww.com/jn/202310/t20231019_10746232.html" target="_blank">Jinan Specialty Snacks Exploration Tour</a></h4>
+                <p>Taste Jinan's specialty snacks, such as You Xuan, Sweet and Sour Carp, and Potstickers...</p>
+            </div>
+            <div class="search-item version-4">
+                <h4><a href="https://touch.go.qunar.com/utilinfo/501?destId=300150&destType=1" target="_blank">Jinan Festival Celebrations</a></h4>
+                <p>Experience Jinan's traditional festival celebrations, such as Baotu Spring Lantern Festival and Qianfo Mountain Temple Fair...</p>
+            </div>
+            <div class="search-item version-4">
+                <h4><a href="https://www.maigoo.com/top/437674.html" target="_blank">One-Day Tour Recommendation in Jinan</a></h4>
+                <p>A one-day tour recommendation for time-limited visitors, covering Baotu Spring, Daming Lake, and Qianfo Mountain...</p>
+            </div>
+            <div class="search-item version-4">
+                <h4><a href="https://zhuanlan.zhihu.com/p/617975801" target="_blank">Two-Day In-Depth Tour of Jinan</a></h4>
+                <p>A two-day tour recommendation, deeply experiencing Jinan's historical culture and natural scenery...</p>
+            </div>
+            <div class="search-item version-4">
+                <h4><a href="https://zhuanlan.zhihu.com/p/40680191" target="_blank">Jinan Photography Spots Guide</a></h4>
+                <p>A photography paradise, recommending the best locations for capturing Jinan's scenic beauty...</p>
+            </div>
+            <div class="search-item version-4">
+                <h4><a href="https://jn.bendibao.com/tour/2017921/47306.shtm" target="_blank">Jinan Family-Friendly Tour Recommendations</a></h4>
+                <p>Family-friendly attractions and activities, such as Jinan Zoo and Children's Park...</p>
+            </div>
+
+            <!-- Version 5 -->
+            <div class="search-item version-5">
+                <h4><a href="https://www.sohu.com/a/46632307_351299" target="_blank">In-Depth Tour of Historical and Cultural Sites in Jinan</a></h4>
+                <p>Deeply explore Jinan's historical sites, such as Baotu Spring, Daming Lake, and Qianfo Mountain...</p>
+            </div>
+            <div class="search-item version-5">
+                <h4><a href="https://www.danglv.com/gonglue/20250215/19687.html" target="_blank">In-Depth Tour of Natural Scenery in Jinan</a></h4>
+                <p>Enjoy Jinan's natural beauty, including Xueye Lake, Jiu Ru Mountain, and Hongye Valley...</p>
+            </div>
+            <div class="search-item version-5">
+                <h4><a href="https://www.mafengwo.cn/cy/10575/" target="_blank">Exploration of Jinan's Specialty Cuisine</a></h4>
+                <p>Explore Jinan's specialty cuisine, such as Da Shun Mud Soup, Jinan Roast Chicken, and Braised Sea Cucumber...</p>
+            </div>
+            <div class="search-item version-5">
+                <h4><a href="https://www.163.com/dy/article/JJDJE5QG05561JSU.html" target="_blank">Top 10 Night Markets in Jinan, Night Market Food Map</a></h4>
+                <p>Experience Jinan's specialty commercial areas and nightlife, such as Quancheng Road Night Market and Kuanhouli...</p>
+            </div>
+            <div class="search-item version-5">
+                <h4><a href="https://www.maigoo.com/goomai/158262.html" target="_blank">In-Depth Experience of Jinan's Folk Culture</a></h4>
+                <p>Deeply experience Jinan's folk culture, such as folk arts and traditional handicrafts...</p>
+            </div>
+            <div class="search-item version-5">
+                <h4><a href="https://m.thepaper.cn/newsDetail_forward_28112749" target="_blank">"This Stop, Jinan" 20 Unmissable Summer Family-Friendly Tour Spots</a></h4>
+                <p>Experience family-friendly attractions and activities suitable for family outings, such as Jinan Zoo and theme parks...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/function.js') }}"></script>
+</body>
+
+</html>

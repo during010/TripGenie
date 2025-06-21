@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>畅游济南小助手</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/headstyle.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- 左侧边栏 -->
+    <div class="left-sidebar" id="leftSidebar">
+        <div class="toggle-sidebar" onclick="toggleSidebar()">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="logo-section">
+            <img src="C:\Users\admin\PycharmProjects\python创新\static\logo.png" alt="Logo" class="logo">
+        </div>
+        <div class="sidebar-tools">
+            <div class="sidebar-tool" id="newConversationBtnSide">
+                <i class="fas fa-sync"></i>
+                <span>开启新对话</span>
+            </div>
+            <div class="sidebar-tool">
+                <i class="fas fa-history"></i>
+                <span>历史记录</span>
+            </div>
+            <div class="sidebar-tool">
+                <i class="fas fa-cog"></i>
+                <span>设置</span>
+            </div>
+          <div class="sidebar-tool" onclick="toggleLanguage()">
+                <i class="fas fa-globe"></i>
+                <span id="languageText">中/英文切换</span>
+            </div>
+<div class="sidebar-tool theme-toggle">
+    <i class="fas fa-moon"></i>
+    <span>主题切换</span>
+    <select id="themeSelect" class="theme-select" onchange="handleThemeChange()" style="display: none;">
+        <option value="light">浅色主题</option>
+        <option value="dark">深色主题</option>
+        <option value="custom">自定义背景</option>
+    </select>
+</div>
+<div class="user-settings">
+        <div class="sidebar-tool" id="loginButton" onclick="toggleLogin()">
+            <i class="fas fa-user"></i>
+            <span id="loginText">登录/注册</span>
+        </div>
+        <div class="sidebar-tool" id="logoutItem" style="display: none;" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>退出</span>
+        </div>
+    </div>
+
+            <div class="settings-menu">
+                <div class="settings-item">
+                    <i class="fas fa-user"></i>
+                    <span>用户0107</span>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-adjust"></i>
+                    <span>界面主题</span>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-globe"></i>
+                    <span>Language</span>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-print"></i>
+                    <span>导出PDF</span>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-camera"></i>
+                    <span>截图</span>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-user-cog"></i>
+                    <span>用户反馈</span>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- 登录模态框 -->
+<div class="login-modal" id="loginModal">
+    <div class="login-form">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3>登录</h3>
+            <button class="close-button" onclick="closeLoginModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <input type="text" id="username" placeholder="用户名">
+        <input type="password" id="password" placeholder="密码">
+        <button onclick="login()">登录</button>
+        <div class="register-link" onclick="showRegisterModal()">注册新账号</div>
+    </div>
+</div>
+
+<!-- 注册模态框 -->
+<div class="login-modal" id="registerModal" style="display: none;">
+    <div class="login-form">
+        <h3>注册</h3>
+        <input type="text" id="registerUsername" placeholder="用户名">
+        <input type="password" id="registerPassword" placeholder="密码">
+        <input type="password" id="confirmPassword" placeholder="确认密码">
+        <button onclick="register()">注册</button>
+        <div class="register-link" onclick="showLoginModal()">返回登录</div>
+    </div>
+</div>
+
+<!-- 成功提示框 -->
+<div class="success-modal" id="successModal">
+    <div class="success-content">
+        <div class="success-header">
+            <h3 id="successModalTitle">注册成功！</h3>
+            <button class="close-button" onclick="closeSuccessModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="success-footer">
+            <button class="success-button" onclick="closeSuccessModal()">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 确认提示框 -->
+<div class="confirm-modal" id="confirmModal">
+    <div class="confirm-content">
+        <div class="confirm-header">
+            <h3 id="confirmModalTitle"></h3>
+            <button class="close-button" onclick="closeConfirmModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="confirm-body">
+            <p id="confirmModalMessage">您确认要退出登录吗？</p>
+        </div>
+        <div class="confirm-footer">
+            <button class="cancel-button" onclick="closeConfirmModal()">取消</button>
+            <button class="confirm-button" onclick="confirmLogout()">确定</button>
+        </div>
+    </div>
+</div>
+     <!-- 主聊天区域 -->
+   <div class="main-content">
+        <div class="chat-header">
+            <h3>畅游济南小助手</h3>
+            <div class="header-actions">
+                <select class="language-select" id="languageSelect" onchange="toggleLanguage()">
+                    <option value="zh" selected>中文</option>
+                    <option value="en">英文</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-overlay" id="feedbackOverlay">
+            <div class="feedback-modal">
+                <h3>反馈详情</h3>
+                <p>请告诉我们您的具体想法：</p>
+                <textarea class="feedback-textarea" placeholder="请输入您的反馈..."></textarea>
+                <div class="modal-buttons">
+                    <button class="modal-button secondary" onclick="closeFeedbackModal()">取消</button>
+                    <button class="modal-button primary" onclick="submitFeedback()">提交</button>
+                </div>
+            </div>
+        </div>
+        <div class="chat-container">
+            <!-- AI消息 -->
+            <div class="message-wrapper">
+                <div class="avatar">AI</div>
+                <div class="message">
+                    您好！这是畅游济南小助手，为了给您规划一个适合您的旅游行程，请告诉我你的旅行初步设想，我来帮你规划一下吧
+                </div>
+                <div class="typing-indicator">AI正在输入...</div>
+            </div>
+        </div>
+        <div class="input-area">
+            <div class="input-container">
+                <textarea id="userInput" class="input-box" placeholder="请输入您的问题..."></textarea>
+            </div>
+            <div class="tools-bar">
+                <div id="aiModel" style="display: inline-block; border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px;">DeepSeek</div>
+                <div class="button-group">
+                    <button id="exportPdfBtn" class="export-button">导出为 PDF</button>
+                    <button id="screenshotBtn" class="screenshot-button" onclick="takeScreenshot()">截图</button>
+                    <button class="send-button" id="sendBtn">
+                        <i class="fas fa-paper-plane"></i> 发送
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 主题切换菜单 -->
+    <div class="theme-menu" id="themeMenu">
+        <div class="theme-menu-item" onclick="switchToDarkTheme()">
+            <i class="fas fa-moon"></i> 深色主题
+        </div>
+        <div class="theme-menu-item" onclick="switchToLightTheme()">
+            <i class="fas fa-sun"></i> 浅色主题
+        </div>
+        <div class="theme-menu-item" onclick="openFileInput()">
+            <i class="fas fa-image"></i> 自定义背景
+        </div>
+    </div>
+    <input type="file" id="file-input" accept="image/*">
+
+   <div class="right-sidebar" id="rightSidebar">
+        <div class="search-results">
+            <!-- 版本 1 -->
+            <div class="search-item version-1">
+                <h4><a href="https://cn.tripadvisor.com/Attractions-g297457-Activities-Jinan_Shandong.html" target="_blank">济南市10大景点玩乐 - Tripadvisor</a></h4>
+                <p>济南市的热门景点，了解推荐的选择方式：1. 山东省博物馆，2. 趵突泉公园，3. 大明湖...</p>
+            </div>
+            <div class="search-item version-1">
+                <h4><a href="https://news.qq.com/rain/a/20220115A01O6400" target="_blank">济南旅游必打卡十大景点，领略泉城山、泉、湖、河、城全面风貌</a></h4>
+                <p>济南因泉而名，所以它给外地游客的影响，大多是围绕着泉而来的，不过泰山之阴、济水之南的济南，除了泉，无论人文历史，还是自然风光还有很多让你迷失的胜景。老靳给大家推荐一下济南旅游必打卡的十大景点...</p>
+            </div>
+              <div class="search-item version-1">
+                <h4><a href="https://news.qlone.cn/2023/1019/c114275-30763285.html" target="_blank">济南历史建筑与文化遗址 - 齐鲁网</a></h4>
+                <p>探访济南的老街巷和历史建筑，如芙蓉街、将军庙街。</p>
+            </div>
+            <div class="search-item version-1">
+                <h4><a href="https://k.sina.com.cn/article_6359585029_17b0f9105001017imq.html" target="_blank">盘点济南最有名的十大特色美食，口水止不住流！看看你都吃过吗？</a></h4>
+                <p>济南特色美食前十名济南，这座拥有深厚历史文化的城市，不仅以其独特的风景吸引着游客，更以其地道的美食让人流连忘返。在济南，有许多令人垂涎欲滴的特色美食，以下是济南特色美食前十名...</p>
+            </div>
+            <div class="search-item version-1">
+                <h4><a href="https://www.sohu.com/a/870067817_121924581" target="_blank">2025年中国济南市的旅游景点、旅游指南</a></h4>
+                <p>秋天的佛慧山红叶黄，泉水潺潺，尽显济南特色...</p>
+            </div>
+            <div class="search-item version-1">
+                <h4><a href="https://www.mafengwo.cn/cy/10575/" target="_blank">济南美食、济南美食推荐</a></h4>
+                <p>在济南找一家鲁菜馆不难，但想吃到满意的鲁菜却不容易...</p>
+            </div>
+
+
+            <!-- 版本 2 -->
+            <div class="search-item version-2">
+                <h4><a href="https://www.zhihu.com/question/634249244" target="_blank">济南有哪些著名的历史文化遗址值得参观？</a></h4>
+                <p>探索济南的历史遗迹，如趵突泉、大明湖和千佛山等...</p>
+            </div>
+            <div class="search-item version-2">
+                <h4><a href="https://jn.bendibao.com/meishi/201761/46549.shtm" target="_blank">济南十大把子肉店推荐 把子肉来两块儿~</a></h4>
+                <p>送上老济南资深吃货推荐人气超旺de把子肉地图，还不懂的Ni快来感受get一下！！...</p>
+            </div>
+            <div class="search-item version-2">
+                <h4><a href="https://cn.tripadvisor.com/Attractions-g297457-Activities-c26-t143-Jinan_Shandong.html" target="_blank">济南10大购物中心</a></h4>
+                <p>在济南的商业区购物和体验夜生活，如万象城...</p>
+            </div>
+            <div class="search-item version-2">
+                <h4><a href="https://sd.dzwww.com/jn/202310/t20231019_10746224.html" target="_blank">济南古村与民俗文化 - 大众网</a></h4>
+                <p>探访朱家峪、章丘古村等民俗文化景点。</p>
+            </div>
+
+            <!-- 版本 3 -->
+            <div class="search-item version-3">
+                <h4><a href="https://www.maigoo.com/top/437674.html" target="_blank">济南一日游推荐路线</a></h4>
+                <p>适合时间有限的游客的精选一日游路线，涵盖趵突泉、大明湖和千佛山...</p>
+            </div>
+            <div class="search-item version-3">
+                <h4><a href="https://zhuanlan.zhihu.com/p/617975801" target="_blank">济南两日深度游</a></h4>
+                <p>两日游推荐，深入体验济南的历史文化与自然风光...</p>
+            </div>
+            <div class="search-item version-3">
+                <h4><a href="https://zhuanlan.zhihu.com/p/40680191" target="_blank">济南摄影胜地指南</a></h4>
+                <p>摄影爱好者的天堂，推荐拍摄济南美景的绝佳地点...</p>
+            </div>
+            <div class="search-item version-3">
+                <h4><a href="https://zhuanlan.zhihu.com/p/620283564" target="_blank">济南10大城市公园</a></h4>
+                <p>大明湖公园位于济南市旧城北部，于1958年建园，因以大明湖为主体而得名，被誉为“泉城明珠”、“中国第一泉水湖”...</p>
+            </div>
+
+        <!-- 版本 4 -->
+            <div class="search-item version-4">
+            <h4><a href="https://sd.dzwww.com/jn/202310/t20231019_10746232.html</url>" target="_blank">济南特色小吃探索之旅</a></h4>
+            <p>品尝济南特色小吃，如油旋、糖醋鲤鱼和锅贴...</p>
+        </div>
+            <div class="search-item version-4">
+            <h4><a href="https://touch.go.qunar.com/utilinfo/501?destId=300150&destType=1" target="_blank">济南节日庆典</a></h4>
+            <p>体验济南的传统节日庆典，如趵突泉灯会、千佛山庙会...</p>
+        </div>
+        <div class="search-item version-4">
+            <h4><a href="https://www.maigoo.com/top/437674.html" target="_blank">济南一日游推荐路线</a></h4>
+            <p>适合时间有限的游客的精选一日游路线，涵盖趵突泉、大明湖和千佛山...</p>
+        </div>
+        <div class="search-item version-4">
+            <h4><a href="https://zhuanlan.zhihu.com/p/617975801" target="_blank">济南两日深度游</a></h4>
+            <p>两日游推荐，深入体验济南的历史文化与自然风光...</p>
+        </div>
+         <div class="search-item version-4">
+            <h4><a href="https://zhuanlan.zhihu.com/p/40680191" target="_blank">济南摄影胜地指南</a></h4>
+            <p>摄影爱好者的天堂，推荐拍摄济南美景的绝佳地点...</p>
+        </div>
+        <div class="search-item version-4">
+            <h4><a href="https://jn.bendibao.com/tour/2017921/47306.shtm" target="_blank">济南亲子游推荐</a></h4>
+            <p>适合家庭出游的景点和活动，如济南动物园、儿童公园...</p>
+        </div>
+
+        <!-- 版本 6 -->
+        <div class="search-item version-5">
+            <h4><a href="https://www.sohu.com/a/46632307_351299" target="_blank">济南历史文化景点深度游</a></h4>
+            <p>深入了解济南的历史遗迹，如趵突泉、大明湖和千佛山...</p>
+        </div>
+        <div class="search-item version-5">
+            <h4><a href="https://www.danglv.com/gonglue/20250215/19687.html" target="_blank">济南自然风光深度游</a></h4>
+            <p>深入欣赏济南的自然美景，包括雪野湖、九如山和红叶谷...</p>
+        </div>
+        <div class="search-item version-5">
+            <h4><a href="https://www.mafengwo.cn/cy/10575/" target="_blank">济南特色美食探索</a></h4>
+            <p>探索济南特色美食，如大舜泥汤、济南肴鸡和葱烧海参...</p>
+        </div>
+        <div class="search-item version-5">
+            <h4><a href="https://www.163.com/dy/article/JJDJE5QG05561JSU.html" target="_blank">济南夜市排行榜前十名夜市，夜市美食地图全攻略</a></h4>
+            <p>在济南的特色商业区购物和体验夜生活，如泉城路夜市、宽厚里...</p>
+        </div>
+        <div class="search-item version-5">
+            <h4><a href="https://www.maigoo.com/goomai/158262.html" target="_blank">济南民俗文化深度体验</a></h4>
+            <p>深入体验济南的民俗文化，如民间艺术、传统手工艺...</p>
+        </div>
+        <div class="search-item version-5">
+            <h4><a href="https://m.thepaper.cn/newsDetail_forward_28112749" target="_blank">“这一站，济南”不可错过的20个暑期亲子游打卡地</a></h4>
+            <p>深度体验适合家庭出游的景点和活动，如济南动物园、主题乐园...</p>
+        </div>
+    </div>
+        </div>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/function.js') }}"></script>
+</body>
+
+</html>

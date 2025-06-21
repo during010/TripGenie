@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>注册</title>
+  <style>
+    /* 页面整体背景和布局 */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #333;
+      position: relative;
+      /* 新增 */
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('static/bg.jpg') no-repeat center center / cover;
+      opacity: 0.75;
+      z-index: -1;
+    }
+
+    /* 注册框 */
+    .box {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 40px 35px;
+      border-radius: 15px;
+      box-shadow: 0 12px 25px rgba(102, 126, 234, 0.3);
+      width: 350px;
+      position: relative;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .box:hover {
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+    }
+
+    /* 标题 */
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 700;
+      font-size: 28px;
+      color: #4b3f6b;
+    }
+
+    /* 输入框 */
+    input {
+      width: 100%;
+      padding: 14px 18px;
+      margin: 12px 0;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 8px rgba(102, 126, 234, 0.5);
+    }
+
+    /* 注册按钮 */
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #667eea;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      font-size: 17px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    button:hover {
+      background: #5a6ddd;
+      box-shadow: 0 6px 18px rgba(90, 109, 221, 0.6);
+    }
+
+    button:active {
+      background: #4d5bbb;
+    }
+
+    /* 底部切换登录 */
+    .switch {
+      position: absolute;
+      bottom: 18px;
+      right: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .switch a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .switch a:hover {
+      color: #4b3f6b;
+      text-decoration: underline;
+    }
+
+    /* 消息提示 */
+    #message {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 15px;
+      min-height: 20px;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h2>注册账号</h2>
+    <input type="text" id="username" placeholder="用户名" autocomplete="off" />
+    <input type="password" id="password" placeholder="密码" autocomplete="new-password" />
+    <input type="password" id="confirmPassword" placeholder="确认密码" autocomplete="new-password" />
+    <button onclick="register()">注册</button>
+    <div class="switch">已有账号？<a href="/">登录账号</a></div>
+    <div id="message" style="color: red;"></div>
+  </div>
+
+  <script>
+    function register() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+      const messageElem = document.getElementById('message');
+
+      messageElem.style.color = 'red';
+      if (!username || !password || !confirmPassword) {
+        messageElem.innerText = '请输入完整信息';
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert('两次输入的密码不一致');
+        // 清空密码输入框
+        document.getElementById('password').value = '';
+        document.getElementById('confirmPassword').value = '';
+        return;
+      }
+
+      fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+        .then(res => res.json().then(data => ({ status: res.status, body: data })))
+        .then(res => {
+          if (res.status === 200) {
+            messageElem.style.color = 'green';
+            messageElem.innerText = res.body.message;
+            // 注册成功后2秒跳转登录页
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 2000);
+          } else {
+            messageElem.innerText = res.body.message;
+          }
+        })
+        .catch(() => {
+          messageElem.innerText = '网络错误，请稍后重试';
+        });
+    }
+  </script>
+</body>
+
+</html>

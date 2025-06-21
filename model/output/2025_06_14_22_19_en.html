@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a1fbf6bbb82785e7e8dc4bf23b092eb5 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_a1fbf6bbb82785e7e8dc4bf23b092eb5" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a1fbf6bbb82785e7e8dc4bf23b092eb5 = L.map(
+                "map_a1fbf6bbb82785e7e8dc4bf23b092eb5",
+                {
+                    center: [36.66788577342825, 117.01985737438012],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_4778d4f329b1f7932b2679efeced002c = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_4778d4f329b1f7932b2679efeced002c.addTo(map_a1fbf6bbb82785e7e8dc4bf23b092eb5);
+        
+    
+            var marker_e509965ef5a4b5f362da5b5af48c5f3a = L.marker(
+                [36.67454520499587, 117.03680688152173],
+                {}
+            ).addTo(map_a1fbf6bbb82785e7e8dc4bf23b092eb5);
+        
+    
+            var icon_35f199e12cab3f75c4ac9999a6c086a9 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_e509965ef5a4b5f362da5b5af48c5f3a.setIcon(icon_35f199e12cab3f75c4ac9999a6c086a9);
+        
+    
+        var popup_fee67a35cdbdc4185e233057962373e3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e33fea078db4c9506d832c4967ea53fa = $(`<div id="html_e33fea078db4c9506d832c4967ea53fa" style="width: 100.0%; height: 100.0%;">0 - Jinan World's First Spring Scenic Area</div>`)[0];
+                popup_fee67a35cdbdc4185e233057962373e3.setContent(html_e33fea078db4c9506d832c4967ea53fa);
+            
+        
+
+        marker_e509965ef5a4b5f362da5b5af48c5f3a.bindPopup(popup_fee67a35cdbdc4185e233057962373e3)
+        ;
+
+        
+    
+    
+            var marker_4e9862fddfa027eb662b58e2c44481c2 = L.marker(
+                [36.6680573428927, 117.03136002023992],
+                {}
+            ).addTo(map_a1fbf6bbb82785e7e8dc4bf23b092eb5);
+        
+    
+            var icon_f2259536c0da6623d3fcc63114476c24 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_4e9862fddfa027eb662b58e2c44481c2.setIcon(icon_f2259536c0da6623d3fcc63114476c24);
+        
+    
+        var popup_c6ef9c6f525bced0ae0540652b7f6fa5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5f31ca777d8bad4a07aa274d2b81bb31 = $(`<div id="html_5f31ca777d8bad4a07aa274d2b81bb31" style="width: 100.0%; height: 100.0%;">1 - Black Tiger Spring</div>`)[0];
+                popup_c6ef9c6f525bced0ae0540652b7f6fa5.setContent(html_5f31ca777d8bad4a07aa274d2b81bb31);
+            
+        
+
+        marker_4e9862fddfa027eb662b58e2c44481c2.bindPopup(popup_c6ef9c6f525bced0ae0540652b7f6fa5)
+        ;
+
+        
+    
+    
+            var marker_85b3bd27bc3032fe7f8179dc7875faed = L.marker(
+                [36.65092868005821, 117.02040708531422],
+                {}
+            ).addTo(map_a1fbf6bbb82785e7e8dc4bf23b092eb5);
+        
+    
+            var icon_579d476a87c66125062624cdbb481e1d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_85b3bd27bc3032fe7f8179dc7875faed.setIcon(icon_579d476a87c66125062624cdbb481e1d);
+        
+    
+        var popup_cfc97adca139139ab8a94b3c124d8dfa = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3c1d08b6c6e7a3bded2975bf3f06e174 = $(`<div id="html_3c1d08b6c6e7a3bded2975bf3f06e174" style="width: 100.0%; height: 100.0%;">2 - Quancheng Square</div>`)[0];
+                popup_cfc97adca139139ab8a94b3c124d8dfa.setContent(html_3c1d08b6c6e7a3bded2975bf3f06e174);
+            
+        
+
+        marker_85b3bd27bc3032fe7f8179dc7875faed.bindPopup(popup_cfc97adca139139ab8a94b3c124d8dfa)
+        ;
+
+        
+    
+    
+            var marker_c1bd431fbdd16b650476b7e5c6cecff9 = L.marker(
+                [36.68317817122653, 117.02619269977569],
+                {}
+            ).addTo(map_a1fbf6bbb82785e7e8dc4bf23b092eb5);
+        
+    
+            var icon_810a32b4c70fe182e6af47122d458034 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_c1bd431fbdd16b650476b7e5c6cecff9.setIcon(icon_810a32b4c70fe182e6af47122d458034);
+        
+    
+        var popup_c308f93226c88542c93c444acda1cedf = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_741798bbd3055d14fa3496fba2986b78 = $(`<div id="html_741798bbd3055d14fa3496fba2986b78" style="width: 100.0%; height: 100.0%;">3 - Jinan Daming Lake Scenic Area</div>`)[0];
+                popup_c308f93226c88542c93c444acda1cedf.setContent(html_741798bbd3055d14fa3496fba2986b78);
+            
+        
+
+        marker_c1bd431fbdd16b650476b7e5c6cecff9.bindPopup(popup_c308f93226c88542c93c444acda1cedf)
+        ;
+
+        
+    
+    
+            var marker_d430792b79b37b595745e6c6d75fc347 = L.marker(
+                [36.66271946796795, 116.984520185049],
+                {}
+            ).addTo(map_a1fbf6bbb82785e7e8dc4bf23b092eb5);
+        
+    
+            var icon_1830117762bdd1c06821df74c15057cf = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_d430792b79b37b595745e6c6d75fc347.setIcon(icon_1830117762bdd1c06821df74c15057cf);
+        
+    
+        var popup_4f056bddd51e2f46b4be3d782f2afac4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7a1c40eeaeeefd459efc08fe632341f3 = $(`<div id="html_7a1c40eeaeeefd459efc08fe632341f3" style="width: 100.0%; height: 100.0%;">4 - Furong Street</div>`)[0];
+                popup_4f056bddd51e2f46b4be3d782f2afac4.setContent(html_7a1c40eeaeeefd459efc08fe632341f3);
+            
+        
+
+        marker_d430792b79b37b595745e6c6d75fc347.bindPopup(popup_4f056bddd51e2f46b4be3d782f2afac4)
+        ;
+
+        
+    
+    
+            var poly_line_a0be63ded662389c17af8f1379b35261 = L.polyline(
+                [[36.67454520499587, 117.03680688152173], [36.6680573428927, 117.03136002023992], [36.65092868005821, 117.02040708531422], [36.68317817122653, 117.02619269977569], [36.66271946796795, 116.984520185049]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1, "smoothFactor": 1.0, "stroke": true, "weight": 2.5}
+            ).addTo(map_a1fbf6bbb82785e7e8dc4bf23b092eb5);
+        
+</script>
+</html>

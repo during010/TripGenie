@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Jinan Travel Assistant</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/headstyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/headstyle_weather.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- Left Sidebar -->
+    <div class="left-sidebar" id="leftSidebar">
+        <div class="toggle-sidebar" onclick="toggleSidebar()">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="logo-section">
+            <img src="static\logo.jpg" alt="Logo" class="logo">
+        </div>
+        <div class="sidebar-tools">
+            <div class="sidebar-tool" id="newConversationBtnSide">
+                <i class="fas fa-sync"></i>
+                <span>New Conversation</span>
+            </div>
+            <div class="sidebar-tool" id="historyButton" onclick="showHistoryPage()">
+                <i class="fas fa-history"></i>
+                <span>History</span>
+            </div>
+            <div class="sidebar-tool" id="publicTransportBtn">
+                <i class="fas fa-bus"></i>
+                <span>Public Transport</span>
+            </div>
+            <div class="sidebar-tool" id="languageToggleBtn">
+                <i class="fas fa-globe"></i>
+                <span id="languageToggleText">Chinese/Engish</span>
+            </div>
+            <div class="sidebar-tool" id="weatherInfoBtn" onclick="showWeatherPage()">
+                <i class="fas fa-cloud-sun"></i>
+                <span>weather</span>
+            </div>
+            <div class="sidebar-tool theme-toggle" id="themeButton">
+                <i class="fas fa-moon"></i>
+                <span style="margin-left: -5px;">Theme Switch</span>
+                <select id="themeSelect" class="theme-select" onchange="handleThemeChange()" style="display: none;">
+                    <option value="light">Light Theme</option>
+                    <option value="dark">Dark Theme</option>
+                    <option value="custom">Custom Background</option>
+                </select>
+            </div>
+        </div>
+        <div class="user-settings" id="userButton">
+            <div class="sidebar-tool" id="userIcon" style="cursor: pointer;" onclick="toggleUserMenu()">
+                <i class="fas fa-user"></i>
+                <span id="displayUsername">Username</span>
+            </div>
+
+            <div id="userMenu"
+                style="display: none; position: absolute; right: 0; bottom: 100%; background: white; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); z-index: 100;">
+                <div style="padding: 8px 12px; border-bottom: 1px solid #eee;">
+                    User: <span id="menuUsername" style="font-weight: bold;"></span>
+                </div>
+                <div style="padding: 8px 12px; cursor: pointer;" onclick="logout()">Logout</div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- 天气信息页面 -->
+    <div class="weather-page" id="weatherPage" style="display: none; padding: 20px 40px;">
+        <div style="margin-bottom: 10px;">
+            <button class="back-button" onclick="backToMainPage()"
+                style="display: flex; align-items: center; gap: 5px;">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+        </div>
+
+        <h2 class="weather-title" style="margin: 0 0 20px 0;">weather</h2>
+
+        <div class="weather-buttons" style="display: flex; gap: 20px; margin-bottom: 20px;">
+            <button class="weather-btn" onclick="showWeather(7)">7days</button>
+            <button class="weather-btn" onclick="showWeather(15)">15days</button>
+        </div>
+
+        <!-- 天气卡片容器 -->
+        <div id="weatherCardsContainer" style="overflow-x: auto; white-space: nowrap;">
+            <div id="weatherCards" style="display: flex; gap: 10px; "></div>
+        </div>
+
+        <!-- 折线图 -->
+        <canvas id="tempChart" width="1200" height="360" style="margin-top: 30px;"></canvas>
+
+    </div>
+
+
+    <!-- History Page -->
+    <div class="history-page" id="historyPage">
+        <button class="back-button" onclick="backToMainPage()">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <h2 class="history-title">History Records</h2>
+        <div class="history-cards" id="historyCards">
+            <!-- History cards will be dynamically generated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-form">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>Login</h3>
+                <button class="close-button" onclick="closeLoginModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <div class="register-link" onclick="showRegisterModal()">Register New Account</div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="login-modal" id="registerModal" style="display: none;">
+        <div class="login-form">
+            <h3>Register</h3>
+            <input type="text" id="registerUsername" placeholder="Username">
+            <input type="password" id="registerPassword" placeholder="Password">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+            <button onclick="register()">Register</button>
+            <div class="register-link" onclick="showLoginModal()">Back to Login</div>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="historyModal" class="confirm-modal">
+        <div class="confirm-content">
+            <div class="confirm-header">
+                <h3 id="historyModalTitle">History</h3>
+                <button class="close-button" onclick="closeHistoryModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="confirm-body">
+                <div id="historyContent"></div>
+            </div>
+            <div class="confirm-footer">
+                <button class="cancel-button" onclick="closeHistoryModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-header">
+                <h3 id="successModalTitle">Registration Successful!</h3>
+                <button class="close-button" onclick="closeSuccessModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="success-footer">
+                <button class="success-button" onclick="closeSuccessModal()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="confirm-modal" id="confirmModal">
+        <div class="confirm-content">
+            <div class="confirm-header">
+                <h3 id="confirmModalTitle"></h3>
+                <button class="close-button" onclick="closeConfirmModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="confirm-body">
+                <p id="confirmModalMessage">Are you sure you want to log out?</p>
+            </div>
+            <div class="confirm-footer">
+                <button class="cancel-button" onclick="closeConfirmModal()">Cancel</button>
+                <button class="confirm-button" onclick="confirmLogout()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Public Transport Page -->
+    <div id="publicTransportPage" class="content-page" style="display: none;">
+        <div class="public-transport-container">
+            <button class="back-button" onclick="backToMainPage()">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <h2>Jinan Bus Routes</h2>
+            <div class="search-bar">
+                <input type="text" id="routeSearch" placeholder="Search Bus Routes...">
+                <button onclick="searchRoute()">Search</button>
+            </div>
+            <div class="bus-table-container">
+                <table id="busTable" class="bus-table">
+                    <thead>
+                        <tr>
+                            <th>Route</th>
+                            <th>Terminals</th>
+                            <th>Operating Dates</th>
+                            <th>First Bus</th>
+                            <th>Last Bus</th>
+                            <th>Fare</th>
+                            <th>Discount</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="busTableBody"></tbody>
+                </table>
+            </div>
+            <div class="pagination-container">
+                <button onclick="prevPage()" id="prevBtn">Previous</button>
+                <span id="pageInfo">Page <span id="currentPage">1</span> / <span id="totalPages">0</span></span>
+                <button onclick="nextPage()" id="nextBtn">Next</button>
+            </div>
+        </div>
+
+        <div id="stationInfoSidebar" class="station-info-sidebar">
+            <div class="station-info-header">
+                <h3>Station Info</h3>
+                <button id="reverseButton" onclick="reverseStations()">↑ ↓ Reverse</button>
+            </div>
+            <div id="stationInfoContent"></div>
+            <div class="station-info-footer">
+                <button onclick="hideStationInfo()" class="close-button">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Chat Page -->
+    <div id="mainPage" class="main-content">
+        <div class="chat-header">
+            <h3>Jinan Travel Assistant</h3>
+            <div class="header-actions">
+                <select class="language-select" id="languageSelect" onchange="toggleLanguage()">
+                    <option value="zh">Chinese</option>
+                    <option value="en" selected>English</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-overlay" id="feedbackOverlay">
+            <div class="feedback-modal">
+                <h3>Feedback</h3>
+                <p>Please let us know your thoughts:</p>
+                <textarea class="feedback-textarea" placeholder="Enter your feedback..."></textarea>
+                <div class="modal-buttons">
+                    <button class="modal-button secondary" onclick="closeFeedbackModal()">Cancel</button>
+                    <button class="modal-button primary" onclick="submitFeedback()">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="chat-container">
+            <div class="message-wrapper">
+                <img src="static/logo.jpg" alt="Logo" class="logo">
+                <div class="message">
+                    Hello! I'm your Jinan Travel Assistant. Please tell me your travel ideas, and I'll help you plan a
+                    suitable itinerary!
+                </div>
+                <div class="typing-indicator">AI is typing...</div>
+            </div>
+        </div>
+        <div class="input-area">
+            <div class="input-container">
+                <textarea id="userInput" class="input-box" placeholder="Enter your question..."></textarea>
+            </div>
+            <div class="tools-bar">
+                <div id="aiModel"
+                    style="display: inline-block; border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px;">
+                    DeepSeek</div>
+                <div class="button-group">
+                    <button id="exportPdfBtn" class="export-button">Export to PDF</button>
+                    <button id="screenshotBtn" class="screenshot-button" onclick="takeScreenshot()">Screenshot</button>
+                    <button type="button" class="send-button" id="sendBtn">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Menu -->
+    <div class="theme-menu" id="themeMenu">
+        <div class="theme-menu-item" onclick="switchToDarkTheme()">
+            <i class="fas fa-moon"></i> Dark Theme
+        </div>
+        <div class="theme-menu-item" onclick="switchToLightTheme()">
+            <i class="fas fa-sun"></i> Light Theme
+        </div>
+        <div class="theme-menu-item" onclick="openFileInput()">
+            <i class="fas fa-image"></i> Custom Background
+        </div>
+    </div>
+    <input type="file" id="file-input" accept="image/*">
+
+    <div class="right-sidebar" id="rightSidebar">
+        <button class="close-btn" onclick="closeSidebar()">×</button>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/function.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/function_weather.js') }}"></script>
+</body>
+
+</html>

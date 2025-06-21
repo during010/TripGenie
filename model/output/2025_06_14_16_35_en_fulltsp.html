@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_28614da19e2ddf95af5dfa03ea24353e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_28614da19e2ddf95af5dfa03ea24353e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_28614da19e2ddf95af5dfa03ea24353e = L.map(
+                "map_28614da19e2ddf95af5dfa03ea24353e",
+                {
+                    center: [36.66774360648176, 117.02745294042201],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_397dd723e1c48e1d8b280499aeac3320 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_397dd723e1c48e1d8b280499aeac3320.addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var marker_e25ed6a88f065d6042f74955d5ad221e = L.marker(
+                [36.68012930432908, 117.02841260013496],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_75611c0d5734d57258d442c11d5a54dd = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_e25ed6a88f065d6042f74955d5ad221e.setIcon(icon_75611c0d5734d57258d442c11d5a54dd);
+        
+    
+        var popup_ff3cca40e3aea82bd4d1ba368f1fcdbd = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_dbd723ae728820c95b0d82f1d8787506 = $(`<div id="html_dbd723ae728820c95b0d82f1d8787506" style="width: 100.0%; height: 100.0%;">0 - Autumn Willow Poetry Society</div>`)[0];
+                popup_ff3cca40e3aea82bd4d1ba368f1fcdbd.setContent(html_dbd723ae728820c95b0d82f1d8787506);
+            
+        
+
+        marker_e25ed6a88f065d6042f74955d5ad221e.bindPopup(popup_ff3cca40e3aea82bd4d1ba368f1fcdbd)
+        ;
+
+        
+    
+    
+            var marker_71db12487fad32e090f251b73f9b5f7d = L.marker(
+                [36.68083660726167, 117.03248745589933],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_00f55b58c8815a194056d4e19e2fc230 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_71db12487fad32e090f251b73f9b5f7d.setIcon(icon_00f55b58c8815a194056d4e19e2fc230);
+        
+    
+        var popup_891ff24bee9da09c795d4416b1c79bf0 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f0d2c1b953cdf4b92d38b599937b75f6 = $(`<div id="html_f0d2c1b953cdf4b92d38b599937b75f6" style="width: 100.0%; height: 100.0%;">1 - Chao Ran Tower</div>`)[0];
+                popup_891ff24bee9da09c795d4416b1c79bf0.setContent(html_f0d2c1b953cdf4b92d38b599937b75f6);
+            
+        
+
+        marker_71db12487fad32e090f251b73f9b5f7d.bindPopup(popup_891ff24bee9da09c795d4416b1c79bf0)
+        ;
+
+        
+    
+    
+            var marker_f709e6857c700de2f8ab932a1e87f596 = L.marker(
+                [36.683949093012636, 117.10934428633146],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_21d4466cac280f9cb92b96487d112b76 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_f709e6857c700de2f8ab932a1e87f596.setIcon(icon_21d4466cac280f9cb92b96487d112b76);
+        
+    
+        var popup_fdac8b5f82d643d0ebf8b1a61090f600 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6d46e0754e158699d0210af3ca9e2bba = $(`<div id="html_6d46e0754e158699d0210af3ca9e2bba" style="width: 100.0%; height: 100.0%;">2 - Digital Jinan Experience Center</div>`)[0];
+                popup_fdac8b5f82d643d0ebf8b1a61090f600.setContent(html_6d46e0754e158699d0210af3ca9e2bba);
+            
+        
+
+        marker_f709e6857c700de2f8ab932a1e87f596.bindPopup(popup_fdac8b5f82d643d0ebf8b1a61090f600)
+        ;
+
+        
+    
+    
+            var marker_0ef0f83dab1045206b2a0a1d4ddc6b15 = L.marker(
+                [36.62519842663037, 117.07752592144234],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_f836609746d7ce9d8626252cac3c7f59 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_0ef0f83dab1045206b2a0a1d4ddc6b15.setIcon(icon_f836609746d7ce9d8626252cac3c7f59);
+        
+    
+        var popup_6d636dd8598ac0edf49974eb16c84b77 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0a397f357848d6f5590e258eb64eca87 = $(`<div id="html_0a397f357848d6f5590e258eb64eca87" style="width: 100.0%; height: 100.0%;">3 - Jiangshui Spring Scenic Area</div>`)[0];
+                popup_6d636dd8598ac0edf49974eb16c84b77.setContent(html_0a397f357848d6f5590e258eb64eca87);
+            
+        
+
+        marker_0ef0f83dab1045206b2a0a1d4ddc6b15.bindPopup(popup_6d636dd8598ac0edf49974eb16c84b77)
+        ;
+
+        
+    
+    
+            var marker_d6e9c47d52b41ebaf186f4fd3994dfd4 = L.marker(
+                [36.62053690188935, 117.08143250912832],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_9ab34375236eaf846315ddaf641d428b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_d6e9c47d52b41ebaf186f4fd3994dfd4.setIcon(icon_9ab34375236eaf846315ddaf641d428b);
+        
+    
+        var popup_588bf8e4805b530d2bf4b1c0c87edbcb = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2a5c849c58425001c957747afef4c4fa = $(`<div id="html_2a5c849c58425001c957747afef4c4fa" style="width: 100.0%; height: 100.0%;">4 - Gold Valley Landscape Gallery</div>`)[0];
+                popup_588bf8e4805b530d2bf4b1c0c87edbcb.setContent(html_2a5c849c58425001c957747afef4c4fa);
+            
+        
+
+        marker_d6e9c47d52b41ebaf186f4fd3994dfd4.bindPopup(popup_588bf8e4805b530d2bf4b1c0c87edbcb)
+        ;
+
+        
+    
+    
+            var marker_f641a9de22086fc75c22d00e7c321339 = L.marker(
+                [36.668532934019375, 116.99240425330433],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_5cfb7949e7b7791709c33cb62e416228 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_f641a9de22086fc75c22d00e7c321339.setIcon(icon_5cfb7949e7b7791709c33cb62e416228);
+        
+    
+        var popup_e00012a8b5f9db4f8ff08e5e9821b293 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e81be0afc76f9e9dbddda6547b9a9a77 = $(`<div id="html_e81be0afc76f9e9dbddda6547b9a9a77" style="width: 100.0%; height: 100.0%;">5 - Ronghui Jinan Old Business District</div>`)[0];
+                popup_e00012a8b5f9db4f8ff08e5e9821b293.setContent(html_e81be0afc76f9e9dbddda6547b9a9a77);
+            
+        
+
+        marker_f641a9de22086fc75c22d00e7c321339.bindPopup(popup_e00012a8b5f9db4f8ff08e5e9821b293)
+        ;
+
+        
+    
+    
+            var marker_241bc656827b23b76188206b5b3cf9e6 = L.marker(
+                [36.668532934019375, 116.99240425330433],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_1ac8501e040c3ce698dfe1b0214e0c2f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_241bc656827b23b76188206b5b3cf9e6.setIcon(icon_1ac8501e040c3ce698dfe1b0214e0c2f);
+        
+    
+        var popup_6076fd33b073e12a83aef1f77edc1447 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9ae6607d5e9b348600c8dc1951ff60c4 = $(`<div id="html_9ae6607d5e9b348600c8dc1951ff60c4" style="width: 100.0%; height: 100.0%;">6 - Jinan Wildlife World</div>`)[0];
+                popup_6076fd33b073e12a83aef1f77edc1447.setContent(html_9ae6607d5e9b348600c8dc1951ff60c4);
+            
+        
+
+        marker_241bc656827b23b76188206b5b3cf9e6.bindPopup(popup_6076fd33b073e12a83aef1f77edc1447)
+        ;
+
+        
+    
+    
+            var marker_ca026b65a3a0c8b0b117ba242dc3e78c = L.marker(
+                [36.66729084232669, 116.9897350378878],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_34acf811e576f667c28946b98075a874 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_ca026b65a3a0c8b0b117ba242dc3e78c.setIcon(icon_34acf811e576f667c28946b98075a874);
+        
+    
+        var popup_2b1acd76a77699c0f9c7809e7b3fbcda = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_62ab6e75d5a6638908f9776db6d64d0e = $(`<div id="html_62ab6e75d5a6638908f9776db6d64d0e" style="width: 100.0%; height: 100.0%;">7 - Zhongshan Park</div>`)[0];
+                popup_2b1acd76a77699c0f9c7809e7b3fbcda.setContent(html_62ab6e75d5a6638908f9776db6d64d0e);
+            
+        
+
+        marker_ca026b65a3a0c8b0b117ba242dc3e78c.bindPopup(popup_2b1acd76a77699c0f9c7809e7b3fbcda)
+        ;
+
+        
+    
+    
+            var marker_9b88e66f1e6027af670816350ee29d14 = L.marker(
+                [36.67342052726956, 116.99383844211928],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_443c26325fea6f8f6b76992929ef78bc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_9b88e66f1e6027af670816350ee29d14.setIcon(icon_443c26325fea6f8f6b76992929ef78bc);
+        
+    
+        var popup_af2b63893a43e673bec28f39613814a3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0b6454a0ea8c0ff49dd0b84c7793942c = $(`<div id="html_0b6454a0ea8c0ff49dd0b84c7793942c" style="width: 100.0%; height: 100.0%;">8 - Quancheng Eye路Sky View Platform</div>`)[0];
+                popup_af2b63893a43e673bec28f39613814a3.setContent(html_0b6454a0ea8c0ff49dd0b84c7793942c);
+            
+        
+
+        marker_9b88e66f1e6027af670816350ee29d14.bindPopup(popup_af2b63893a43e673bec28f39613814a3)
+        ;
+
+        
+    
+    
+            var marker_2284c2a2eb9fe062556ea2f99252142f = L.marker(
+                [36.67194907173926, 117.0153483118377],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_9e1bc321c17a3c70be092f62cc9f823f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_2284c2a2eb9fe062556ea2f99252142f.setIcon(icon_9e1bc321c17a3c70be092f62cc9f823f);
+        
+    
+        var popup_6908a59a3caf11fba6580c6505ffc3ce = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_bf8da62f0d5342f07f621c8fab3e80e6 = $(`<div id="html_bf8da62f0d5342f07f621c8fab3e80e6" style="width: 100.0%; height: 100.0%;">9 - Wulong Park</div>`)[0];
+                popup_6908a59a3caf11fba6580c6505ffc3ce.setContent(html_bf8da62f0d5342f07f621c8fab3e80e6);
+            
+        
+
+        marker_2284c2a2eb9fe062556ea2f99252142f.bindPopup(popup_6908a59a3caf11fba6580c6505ffc3ce)
+        ;
+
+        
+    
+    
+            var marker_e1ab6a411fd2d75fe11c3c2a56416f26 = L.marker(
+                [36.67194907173926, 117.0153483118377],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_90dc1d985185b6c68479a157961760f3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_e1ab6a411fd2d75fe11c3c2a56416f26.setIcon(icon_90dc1d985185b6c68479a157961760f3);
+        
+    
+        var popup_2c261ee425dfa0a532bea7b43d926d4b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4b3a5b1935ee9dd1783d26d5bc2b487a = $(`<div id="html_4b3a5b1935ee9dd1783d26d5bc2b487a" style="width: 100.0%; height: 100.0%;">10 - Ming Shui Ancient City</div>`)[0];
+                popup_2c261ee425dfa0a532bea7b43d926d4b.setContent(html_4b3a5b1935ee9dd1783d26d5bc2b487a);
+            
+        
+
+        marker_e1ab6a411fd2d75fe11c3c2a56416f26.bindPopup(popup_2c261ee425dfa0a532bea7b43d926d4b)
+        ;
+
+        
+    
+    
+            var marker_5a7119bec7d7dfd9a870c0b93eefc73d = L.marker(
+                [36.66709005799265, 117.01640450851188],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_9eca20d7b83cb57e6c6dd4196edb7a8e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_5a7119bec7d7dfd9a870c0b93eefc73d.setIcon(icon_9eca20d7b83cb57e6c6dd4196edb7a8e);
+        
+    
+        var popup_467e4508b3abf453c8b245aebe26145a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5bb7bf94a59cbdc059e4a01b4ca12e01 = $(`<div id="html_5bb7bf94a59cbdc059e4a01b4ca12e01" style="width: 100.0%; height: 100.0%;">11 - Baotu Spring Scenic Area</div>`)[0];
+                popup_467e4508b3abf453c8b245aebe26145a.setContent(html_5bb7bf94a59cbdc059e4a01b4ca12e01);
+            
+        
+
+        marker_5a7119bec7d7dfd9a870c0b93eefc73d.bindPopup(popup_467e4508b3abf453c8b245aebe26145a)
+        ;
+
+        
+    
+    
+            var marker_9adda3c2cdfb763bfeed5ad664aaf1ed = L.marker(
+                [36.66990748329108, 117.01846776059091],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_ee106a28c943013f22e542a898235394 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_9adda3c2cdfb763bfeed5ad664aaf1ed.setIcon(icon_ee106a28c943013f22e542a898235394);
+        
+    
+        var popup_66d8f2c956b9ea5f9fde05d323bf4e1f = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9a85c7e4b61829431fc3cc544cece221 = $(`<div id="html_9a85c7e4b61829431fc3cc544cece221" style="width: 100.0%; height: 100.0%;">12 - Qu Shui Ting Scenic Area</div>`)[0];
+                popup_66d8f2c956b9ea5f9fde05d323bf4e1f.setContent(html_9a85c7e4b61829431fc3cc544cece221);
+            
+        
+
+        marker_9adda3c2cdfb763bfeed5ad664aaf1ed.bindPopup(popup_66d8f2c956b9ea5f9fde05d323bf4e1f)
+        ;
+
+        
+    
+    
+            var marker_cfca5becb08208ae3655621ff9426436 = L.marker(
+                [36.67405183436332, 117.02469851147707],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_56944ceae019257656963ad4cab7ed99 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_cfca5becb08208ae3655621ff9426436.setIcon(icon_56944ceae019257656963ad4cab7ed99);
+        
+    
+        var popup_d3436ac1a46335d5b4f997da82bb5caa = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3aa84fd84e477662427da9c0a032515f = $(`<div id="html_3aa84fd84e477662427da9c0a032515f" style="width: 100.0%; height: 100.0%;">13 - Teng Jiao Spring</div>`)[0];
+                popup_d3436ac1a46335d5b4f997da82bb5caa.setContent(html_3aa84fd84e477662427da9c0a032515f);
+            
+        
+
+        marker_cfca5becb08208ae3655621ff9426436.bindPopup(popup_d3436ac1a46335d5b4f997da82bb5caa)
+        ;
+
+        
+    
+    
+            var marker_a0578cd64ead400f2bd61a6a1fc2d007 = L.marker(
+                [36.677344442597935, 117.02520218316909],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_66f12f898688385f8388ef39d02105e1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_a0578cd64ead400f2bd61a6a1fc2d007.setIcon(icon_66f12f898688385f8388ef39d02105e1);
+        
+    
+        var popup_64397b518faad1a377952b48406416f6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f13cde781bd73d31a773c0bab7697a36 = $(`<div id="html_f13cde781bd73d31a773c0bab7697a36" style="width: 100.0%; height: 100.0%;">14 - Bai Hua Zhou</div>`)[0];
+                popup_64397b518faad1a377952b48406416f6.setContent(html_f13cde781bd73d31a773c0bab7697a36);
+            
+        
+
+        marker_a0578cd64ead400f2bd61a6a1fc2d007.bindPopup(popup_64397b518faad1a377952b48406416f6)
+        ;
+
+        
+    
+    
+            var marker_359fdd9f5ae5a703d561ae4c899f455a = L.marker(
+                [36.68317817122653, 117.02619269977569],
+                {}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+    
+            var icon_292f7a5f4125a26cc9c24ad0f4b95b20 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_359fdd9f5ae5a703d561ae4c899f455a.setIcon(icon_292f7a5f4125a26cc9c24ad0f4b95b20);
+        
+    
+        var popup_c3d16f8a3e6ab506d204766fd265d3f9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c2a090ddf934bbd93e77c3745645a0fc = $(`<div id="html_c2a090ddf934bbd93e77c3745645a0fc" style="width: 100.0%; height: 100.0%;">15 - Jinan Daming Lake Scenic Area</div>`)[0];
+                popup_c3d16f8a3e6ab506d204766fd265d3f9.setContent(html_c2a090ddf934bbd93e77c3745645a0fc);
+            
+        
+
+        marker_359fdd9f5ae5a703d561ae4c899f455a.bindPopup(popup_c3d16f8a3e6ab506d204766fd265d3f9)
+        ;
+
+        
+    
+    
+            var poly_line_fbc506953d986d8f980c5826804cc3f6 = L.polyline(
+                [[36.68012930432908, 117.02841260013496], [36.68083660726167, 117.03248745589933], [36.683949093012636, 117.10934428633146], [36.62519842663037, 117.07752592144234], [36.62053690188935, 117.08143250912832], [36.668532934019375, 116.99240425330433], [36.668532934019375, 116.99240425330433], [36.66729084232669, 116.9897350378878], [36.67342052726956, 116.99383844211928], [36.67194907173926, 117.0153483118377], [36.67194907173926, 117.0153483118377], [36.66709005799265, 117.01640450851188], [36.66990748329108, 117.01846776059091], [36.67405183436332, 117.02469851147707], [36.677344442597935, 117.02520218316909], [36.68317817122653, 117.02619269977569]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1, "smoothFactor": 1.0, "stroke": true, "weight": 2.5}
+            ).addTo(map_28614da19e2ddf95af5dfa03ea24353e);
+        
+</script>
+</html>
